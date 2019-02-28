@@ -1,6 +1,6 @@
 package cn.shuaijunlan.serizlization.java;
 
-import cn.shuaijunlan.trpc.common.util.Assert;
+import cn.shuaijunlan.trpc.common.utils.Assert;
 import cn.shuaijunlan.trpc.serialization.api.Serialization;
 
 import java.io.*;

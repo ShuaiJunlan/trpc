@@ -1,4 +1,4 @@
-package cn.shuaijunlan.trpc.common.util;
+package cn.shuaijunlan.trpc.common.utils;
 
 /**
  * @author Shuai Junlan[shuaijunlan@gmail.com].
