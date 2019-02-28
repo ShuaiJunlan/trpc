@@ -9,7 +9,7 @@ public class TrpcProtocol extends AbstractProtocol {
     /**
      * two bytes
      */
-    private static final int MAGIC_NUMBER = 0x0012;
+    private static final short MAGIC_NUMBER = 0x0012;
     /**
      * one byte
      */
@@ -33,7 +33,7 @@ public class TrpcProtocol extends AbstractProtocol {
      */
     private Object data;
 
-    public static int getMagicNumber() {
+    public static short getMagicNumber() {
         return MAGIC_NUMBER;
     }
 
