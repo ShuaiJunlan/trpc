@@ -4,7 +4,6 @@ import cn.shuaijunlan.serizlization.java.JavaNativeSerialization;
 import cn.shuaijunlan.trpc.remoting.api.protocol.TrpcProtocol;
 import cn.shuaijunlan.trpc.serialization.api.Serialization;
 import io.netty.buffer.ByteBuf;
-import io.netty.buffer.ByteBufAllocator;
 import io.netty.buffer.Unpooled;
 import org.junit.Test;
 
@@ -48,6 +47,6 @@ public class NettyClientTest {
     }
 
     private Serialization getSerialization(byte b){
-        return new JavaNativeSerialization();
+        return JavaNativeSerialization.JAVA_NATIVE_SERIALIZATION;
     }
 }

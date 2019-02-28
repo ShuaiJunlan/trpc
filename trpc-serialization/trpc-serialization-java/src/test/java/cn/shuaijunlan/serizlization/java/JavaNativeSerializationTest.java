@@ -15,7 +15,7 @@ public class JavaNativeSerializationTest {
     static {
     }
 
-    private Serialization serialization = new JavaNativeSerialization();
+    private Serialization serialization = JavaNativeSerialization.JAVA_NATIVE_SERIALIZATION;
     @Test
     public void serialize() {
         Employee employee = new Employee();
@@ -28,9 +28,7 @@ public class JavaNativeSerializationTest {
             System.out.println(bytes.length);
             Employee employee1 = (Employee) serialization.deserialize(bytes);
             assertEquals(employee.toString(), employee1.toString());
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (ClassNotFoundException e) {
+        } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
         }
     }

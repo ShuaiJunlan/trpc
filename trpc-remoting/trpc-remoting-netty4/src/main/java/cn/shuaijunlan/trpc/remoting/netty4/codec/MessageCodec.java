@@ -1,6 +1,5 @@
 package cn.shuaijunlan.trpc.remoting.netty4.codec;
 
-import cn.shuaijunlan.serizlization.java.JavaNativeSerialization;
 import cn.shuaijunlan.trpc.remoting.api.Codec;
 import cn.shuaijunlan.trpc.remoting.api.protocol.AbstractProtocol;
 import cn.shuaijunlan.trpc.remoting.api.protocol.TrpcProtocol;
@@ -66,14 +65,19 @@ public class MessageCodec implements Codec {
         buf.readBytes(data);
         try {
             protocol.setData(getSerialization(protocol.getSerializationType()).deserialize(data));
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (ClassNotFoundException e) {
+        } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
         }
         return protocol;
     }
     private Serialization getSerialization(byte type){
-        return new JavaNativeSerialization();
+        Serialization serialization = null;
+        try {
+            serialization = (Serialization)Class.forName("").newInstance();
+        } catch (InstantiationException | ClassNotFoundException | IllegalAccessException e) {
+            e.printStackTrace();
+        }
+        return serialization;
+
     }
 }

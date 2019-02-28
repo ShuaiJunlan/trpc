@@ -8,6 +8,8 @@
         <module>trpc-common</module>
         <module>trpc-remoting</module>
         <module>trpc-serialization</module>
+        <module>trpc-registry</module>
+        <module>trpc-demo</module>
     </modules>
 
     <parent>

@@ -9,13 +9,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>trpc-serialization</artifactId>
-    <packaging>pom</packaging>
-    <modules>
-        <module>trpc-serialization-api</module>
-        <module>trpc-serialization-java</module>
-        <module>trpc-serialization-fastjson</module>
-    </modules>
+    <artifactId>trpc-demo</artifactId>
 
 
 </project>

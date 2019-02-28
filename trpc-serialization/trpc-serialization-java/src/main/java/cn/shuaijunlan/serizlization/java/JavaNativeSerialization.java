@@ -10,6 +10,7 @@ import java.io.*;
  * @since Created in 6:08 PM 2/28/19.
  */
 public class JavaNativeSerialization implements Serialization {
+    private JavaNativeSerialization(){}
 
     @Override
     public byte[] serialize(Object o) throws IOException {
@@ -26,4 +27,7 @@ public class JavaNativeSerialization implements Serialization {
         ObjectInputStream objectInputStream = new ObjectInputStream(inputStream);
         return objectInputStream.readObject();
     }
+
+    public static final JavaNativeSerialization JAVA_NATIVE_SERIALIZATION = new JavaNativeSerialization();
+
 }
