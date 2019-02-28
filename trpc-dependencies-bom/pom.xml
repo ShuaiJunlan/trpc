@@ -14,6 +14,7 @@
         <!--common libs-->
         <netty4.version>4.1.25.Final</netty4.version>
         <slf4j.version>1.7.25</slf4j.version>
+        <fastjson.version>1.2.54</fastjson.version>
         <!--test-->
         <junit.version>4.12</junit.version>
     </properties>
@@ -33,6 +34,11 @@
                 <groupId>junit</groupId>
                 <artifactId>junit</artifactId>
                 <version>${junit.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>fastjson</artifactId>
+                <version>${fastjson.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
