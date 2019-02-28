@@ -4,6 +4,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <modules>
+        <module>trpc-bom</module>
         <module>trpc-dependencies-bom</module>
         <module>trpc-common</module>
         <module>trpc-remoting</module>
@@ -35,6 +36,13 @@
             <dependency>
                 <groupId>cn.shuaijunlan</groupId>
                 <artifactId>trpc-dependencies-bom</artifactId>
+                <version>${project.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>cn.shuaijunlan</groupId>
+                <artifactId>trpc-bom</artifactId>
                 <version>${project.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
