@@ -24,12 +24,22 @@
             <version>${project.parent.version}</version>
         </dependency>
         <dependency>
+            <groupId>cn.shuaijunlan</groupId>
+            <artifactId>trpc-serialization-java</artifactId>
+            <version>${project.parent.version}</version>
+        </dependency>
+        <dependency>
             <groupId>io.netty</groupId>
             <artifactId>netty-all</artifactId>
         </dependency>
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <scope>test</scope>
         </dependency>
     </dependencies>
 

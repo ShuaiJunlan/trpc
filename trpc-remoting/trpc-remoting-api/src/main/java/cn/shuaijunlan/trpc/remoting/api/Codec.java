@@ -13,7 +13,7 @@ public interface Codec {
      * @param protocol
      * @return
      */
-    ByteBuf encode(AbstractProtocol protocol);
+    ByteBuf encode(AbstractProtocol protocol, ByteBuf buf);
 
     /**
      * decode

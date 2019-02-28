@@ -1,5 +1,6 @@
 package cn.shuaijunlan.trpc.remoting.netty4;
 
+import cn.shuaijunlan.trpc.remoting.netty4.server.NettyServerInitializer;
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.ChannelOption;
 import io.netty.channel.EventLoopGroup;
@@ -30,25 +31,26 @@ public class NettyServer {
     /**
      * doBinding
      * @param port
-     * @throws InterruptedException
      */
-    public void doBind(int port) throws InterruptedException {
+    public void doBind(int port) {
         final ServerBootstrap bootstrap = new ServerBootstrap();
         bootstrap.group(boss, worker)
                 .channel(Epoll.isAvailable()? EpollServerSocketChannel.class: NioServerSocketChannel.class)
-                .option(ChannelOption.SO_KEEPALIVE, true)
+                // .option(ChannelOption.SO_KEEPALIVE, true)
                 .childOption(ChannelOption.SO_KEEPALIVE, true)
                 .childOption(ChannelOption.TCP_NODELAY, true)
                 .childHandler(new NettyServerInitializer());
-        bootstrap.bind(port).addListener(new GenericFutureListener<Future<? super Void>>() {
-            @Override
-            public void operationComplete(Future<? super Void> future) throws Exception {
-                LOGGER.info("Server bootstrap successfully");
-            }
-        }).sync();
-    }
-
-    public static void main(String[] args) {
-
+        try {
+            bootstrap.bind(port).addListener(new GenericFutureListener<Future<? super Void>>() {
+                @Override
+                public void operationComplete(Future<? super Void> future) throws Exception {
+                    LOGGER.info("Server bootstrap successfully");
+                }
+            }).sync();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+            boss.shutdownGracefully();
+            worker.shutdownGracefully();
+        }
     }
 }

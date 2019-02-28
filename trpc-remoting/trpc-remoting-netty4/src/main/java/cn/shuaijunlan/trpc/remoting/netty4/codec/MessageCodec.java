@@ -1,11 +1,13 @@
 package cn.shuaijunlan.trpc.remoting.netty4.codec;
 
+import cn.shuaijunlan.serizlization.java.JavaNativeSerialization;
 import cn.shuaijunlan.trpc.remoting.api.Codec;
 import cn.shuaijunlan.trpc.remoting.api.protocol.AbstractProtocol;
 import cn.shuaijunlan.trpc.remoting.api.protocol.TrpcProtocol;
 import cn.shuaijunlan.trpc.serialization.api.Serialization;
 import io.netty.buffer.ByteBuf;
-import io.netty.buffer.ByteBufAllocator;
+
+import java.io.IOException;
 
 /**
  * @author Shuai Junlan[shuaijunlan@gmail.com].
@@ -27,37 +29,51 @@ public class MessageCodec implements Codec {
         }
         return messageCodec;
     }
+    // public ByteBuf encode(AbstractProtocol protocol, ByteBuf buf){
+    //     return buf;
+    // }
 
     @Override
-    public ByteBuf encode(AbstractProtocol protocol) {
-        //get a bytebuf object
-        ByteBuf byteBuf = ByteBufAllocator.DEFAULT.ioBuffer();
-
+    public ByteBuf encode(AbstractProtocol protocol, ByteBuf byteBuf) {
 
         if (protocol instanceof TrpcProtocol){
             byteBuf.writeShort(TrpcProtocol.getMagicNumber());
             byteBuf.writeByte(((TrpcProtocol) protocol).getRequestType());
-            byteBuf.writeByte(((TrpcProtocol) protocol).getSerizlizationType());
+            byteBuf.writeByte(((TrpcProtocol) protocol).getSerializationType());
             byteBuf.writeLong(((TrpcProtocol) protocol).getRequestID());
             byteBuf.writeInt(((TrpcProtocol) protocol).getDataLength());
-            byteBuf.writeBytes(getSerialization(((TrpcProtocol) protocol).getSerizlizationType()).serialize(((TrpcProtocol) protocol).getData()));
+            try {
+                byteBuf.writeBytes(getSerialization(((TrpcProtocol) protocol).getSerializationType()).serialize(((TrpcProtocol) protocol).getData()));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
         return byteBuf;
     }
 
     @Override
     public AbstractProtocol decode(ByteBuf buf) {
+
+        System.out.println(buf.readableBytes());
+
         TrpcProtocol protocol = new TrpcProtocol();
+        buf.skipBytes(2);//magic number
         protocol.setRequestType(buf.readByte());
-        protocol.setSerizlizationType(buf.readByte());
+        protocol.setSerializationType(buf.readByte());
         protocol.setRequestID(buf.readLong());
         protocol.setDataLength(buf.readInt());
         byte[] data = new byte[protocol.getDataLength()];
         buf.readBytes(data);
-        protocol.setData(getSerialization(protocol.getSerizlizationType()).deserialize(data));
+        try {
+            protocol.setData(getSerialization(protocol.getSerializationType()).deserialize(data));
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
         return protocol;
     }
     private Serialization getSerialization(byte type){
-        return null;
+        return new JavaNativeSerialization();
     }
 }

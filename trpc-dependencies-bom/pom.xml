@@ -14,6 +14,8 @@
         <!--common libs-->
         <netty4.version>4.1.25.Final</netty4.version>
         <slf4j.version>1.7.25</slf4j.version>
+        <!--test-->
+        <junit.version>4.12</junit.version>
     </properties>
     <dependencyManagement>
         <dependencies>
@@ -26,6 +28,11 @@
                 <groupId>org.slf4j</groupId>
                 <artifactId>slf4j-api</artifactId>
                 <version>${slf4j.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>junit</groupId>
+                <artifactId>junit</artifactId>
+                <version>${junit.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

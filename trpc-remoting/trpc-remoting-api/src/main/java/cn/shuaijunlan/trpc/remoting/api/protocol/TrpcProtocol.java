@@ -5,6 +5,7 @@ package cn.shuaijunlan.trpc.remoting.api.protocol;
  * @since Created in 4:29 PM 2/28/19.
  */
 public class TrpcProtocol extends AbstractProtocol {
+    // private static final int TOTAL_LENGTH =
 
     /**
      * two bytes
@@ -45,11 +46,11 @@ public class TrpcProtocol extends AbstractProtocol {
         this.requestType = requestType;
     }
 
-    public byte getSerizlizationType() {
+    public byte getSerializationType() {
         return serializationType;
     }
 
-    public void setSerizlizationType(byte serializationType) {
+    public void setSerializationType(byte serializationType) {
         this.serializationType = serializationType;
     }
 

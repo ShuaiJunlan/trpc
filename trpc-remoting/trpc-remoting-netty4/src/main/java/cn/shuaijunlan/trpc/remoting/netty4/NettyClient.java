@@ -1,15 +1,13 @@
 package cn.shuaijunlan.trpc.remoting.netty4;
 
+import cn.shuaijunlan.trpc.remoting.netty4.client.NettyClientInitializer;
 import io.netty.bootstrap.Bootstrap;
-import io.netty.channel.ChannelFuture;
-import io.netty.channel.ChannelFutureListener;
-import io.netty.channel.ChannelOption;
-import io.netty.channel.EventLoopGroup;
+import io.netty.channel.*;
 import io.netty.channel.epoll.Epoll;
 import io.netty.channel.epoll.EpollEventLoopGroup;
-import io.netty.channel.epoll.EpollServerSocketChannel;
+import io.netty.channel.epoll.EpollSocketChannel;
 import io.netty.channel.nio.NioEventLoopGroup;
-import io.netty.channel.socket.nio.NioServerSocketChannel;
+import io.netty.channel.socket.nio.NioSocketChannel;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -23,21 +21,28 @@ public class NettyClient {
             new EpollEventLoopGroup(Runtime.getRuntime().availableProcessors()) :
             new NioEventLoopGroup(Runtime.getRuntime().availableProcessors());
 
+    private Channel channel;
+
     public void doConnect(String host, int port)  {
         Bootstrap bootstrap = new Bootstrap();
         bootstrap.group(worker)
-                .channel(Epoll.isAvailable()? EpollServerSocketChannel.class: NioServerSocketChannel.class)
+                .channel(Epoll.isAvailable()? EpollSocketChannel.class: NioSocketChannel.class)
                 .option(ChannelOption.SO_KEEPALIVE, true)
                 .handler(new NettyClientInitializer());
         try {
-            bootstrap.connect(host, port).addListener(new ChannelFutureListener() {
+            channel = bootstrap.connect(host, port).addListener(new ChannelFutureListener() {
                 @Override
                 public void operationComplete(ChannelFuture future) throws Exception {
                     LOGGER.info("Client do connecting successfully");
                 }
-            }).sync();
+            }).sync().channel();
         } catch (InterruptedException e) {
             e.printStackTrace();
+            worker.shutdownGracefully();
         }
+    }
+
+    public Channel getChannel() {
+        return channel;
     }
 }
