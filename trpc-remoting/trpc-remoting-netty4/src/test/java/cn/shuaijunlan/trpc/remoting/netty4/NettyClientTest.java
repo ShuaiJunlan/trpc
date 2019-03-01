@@ -85,13 +85,15 @@ public class NettyClientTest {
 
         NettyClient nettyClient = new NettyClient();
         nettyClient.doConnect("127.0.0.1", 8080);
+        // try {
+            for (int i = 0; i < 30000; i++){
+                nettyClient.getChannel().write(requestMessage);
+            }
+        // } catch (InterruptedException e) {
+        //     e.printStackTrace();
+        // }
         try {
-            nettyClient.getChannel().writeAndFlush(requestMessage).sync();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        try {
-            Thread.sleep(10000);
+            Thread.sleep(10000000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
