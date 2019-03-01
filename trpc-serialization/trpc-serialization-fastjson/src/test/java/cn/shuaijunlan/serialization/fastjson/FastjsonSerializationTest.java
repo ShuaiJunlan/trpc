@@ -1,6 +1,7 @@
 package cn.shuaijunlan.serialization.fastjson;
 
 import cn.shuaijunlan.trpc.serialization.api.Serialization;
+import com.alibaba.fastjson.JSON;
 import org.junit.Test;
 
 import java.io.IOException;
@@ -14,6 +15,7 @@ import static org.junit.Assert.*;
 public class FastjsonSerializationTest {
 
     private Serialization serialization = FastjsonSerialization.FASTJSON_SERIALIZATION;
+
     @Test
     public void serialize() {
         Employee employee = new Employee();
@@ -33,5 +35,10 @@ public class FastjsonSerializationTest {
 
     @Test
     public void deserialize() {
+        Employee employee = new Employee();
+        employee.name = "shuaijunlan";
+        employee.age = 14;
+        employee.height = 190;
+        System.out.println(JSON.toJSONString(employee));
     }
 }

@@ -10,6 +10,37 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>trpc-microbench</artifactId>
+    <packaging>jar</packaging>
 
+    <dependencies>
+        <dependency>
+            <groupId>org.openjdk.jmh</groupId>
+            <artifactId>jmh-core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.openjdk.jmh</groupId>
+            <artifactId>jmh-generator-annprocess</artifactId>
+            <!--<version>1.21</version>-->
+            <scope>provided</scope>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.openjdk.jmh</groupId>
+                    <artifactId>jmh-core</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
 
+        <dependency>
+            <groupId>cn.shuaijunlan</groupId>
+            <artifactId>trpc-serialization-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>cn.shuaijunlan</groupId>
+            <artifactId>trpc-serialization-fastjson</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>cn.shuaijunlan</groupId>
+            <artifactId>trpc-serialization-java</artifactId>
+        </dependency>
+    </dependencies>
 </project>
