@@ -1,16 +1,24 @@
 package cn.shuaijunlan.trpc.common.utils;
 
+import org.reflections.Reflections;
+
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Enumeration;
+import java.util.Set;
 
 /**
  * @author Shuai Junlan[shuaijunlan@gmail.com].
  * @since Created in 10:49 AM 3/1/19.
  */
 public class ClassUtils {
+    @SuppressWarnings({"rawtypes", "unchecked"})
+    public static Set<Class<?>> getAllSubClassByInterfaceName(String name) throws ClassNotFoundException {
+        Reflections reflections = new Reflections(name.split("\\.")[0]);
+        return reflections.getSubTypesOf((Class<Object>) Class.forName(name));
+    }
     @SuppressWarnings({"rawtypes", "unchecked"})
     public static ArrayList<Class> getAllClassByInterface(Class clazz) {
         ArrayList<Class> list = new ArrayList<>();

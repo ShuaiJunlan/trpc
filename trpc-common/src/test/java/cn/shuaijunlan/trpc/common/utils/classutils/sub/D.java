@@ -1,6 +1,6 @@
 package cn.shuaijunlan.trpc.common.utils.classutils.sub;
 
-import cn.shuaijunlan.trpc.common.utils.classutils.A;
+import cn.shuaijunlan.trpc.common.A;
 
 /**
  * @author Shuai Junlan[shuaijunlan@gmail.com].
