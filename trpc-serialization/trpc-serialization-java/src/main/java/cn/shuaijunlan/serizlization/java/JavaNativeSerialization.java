@@ -18,14 +18,21 @@ public class JavaNativeSerialization implements Serialization {
         ByteArrayOutputStream arrayOutputStream = new ByteArrayOutputStream();
         ObjectOutputStream objectOutputStream = new ObjectOutputStream(arrayOutputStream);
         objectOutputStream.writeObject(o);
-        return arrayOutputStream.toByteArray();
+        byte[] arr = arrayOutputStream.toByteArray();
+        objectOutputStream.close();
+        arrayOutputStream.close();
+        return arr;
     }
 
     @Override
     public Object deserialize(byte[] bytes) throws IOException, ClassNotFoundException {
+        Assert.notNull(bytes, "bytes == null");
         ByteArrayInputStream inputStream = new ByteArrayInputStream(bytes);
         ObjectInputStream objectInputStream = new ObjectInputStream(inputStream);
-        return objectInputStream.readObject();
+        Object obj = objectInputStream.readObject();
+        objectInputStream.close();
+        inputStream.close();
+        return obj;
     }
 
     public static final JavaNativeSerialization JAVA_NATIVE_SERIALIZATION = new JavaNativeSerialization();

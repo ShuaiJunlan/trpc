@@ -11,6 +11,7 @@
         <module>trpc-serialization</module>
         <module>trpc-registry</module>
         <module>trpc-demo</module>
+        <module>trpc-microbench</module>
     </modules>
 
     <parent>
