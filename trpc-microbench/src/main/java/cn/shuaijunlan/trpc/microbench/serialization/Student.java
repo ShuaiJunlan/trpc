@@ -2,6 +2,7 @@ package cn.shuaijunlan.trpc.microbench.serialization;
 
 import java.io.Serializable;
 import java.util.Arrays;
+import java.util.List;
 
 /**
  * @author Shuai Junlan[shuaijunlan@gmail.com].
@@ -14,6 +15,7 @@ public class Student implements Serializable {
     private double height;
     private long phone;
     private String[] likes;
+    private List<String> educations;
 
     public static long getSerialVersionUID() {
         return serialVersionUID;
@@ -59,6 +61,14 @@ public class Student implements Serializable {
         this.likes = likes;
     }
 
+    public List<String> getEducations() {
+        return educations;
+    }
+
+    public void setEducations(List<String> educations) {
+        this.educations = educations;
+    }
+
     @Override
     public String toString() {
         return "Student{" +
@@ -67,6 +77,7 @@ public class Student implements Serializable {
                 ", height=" + height +
                 ", phone=" + phone +
                 ", likes=" + Arrays.toString(likes) +
+                ", educations=" + educations +
                 '}';
     }
 }
