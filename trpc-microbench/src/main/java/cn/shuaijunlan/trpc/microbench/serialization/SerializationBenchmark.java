@@ -18,39 +18,46 @@ import java.util.concurrent.TimeUnit;
  * @since Created in 4:37 PM 3/1/19.
  * TODO: reference:https://www.xncoding.com/2018/01/09/java/jsons.html
  */
-@BenchmarkMode(Mode.AverageTime)
+@BenchmarkMode(Mode.Throughput)
+@Measurement(iterations = 1, time = 10, timeUnit = TimeUnit.SECONDS)
+// @BenchmarkMode(Mode.AverageTime)
 @OutputTimeUnit(TimeUnit.MILLISECONDS)
 @State(Scope.Benchmark)
 public class SerializationBenchmark {
     private Student student = new Student();
 
 
-    @Param({"10000", "100000", "1000000"})
+    @Param({"1"})
     private int count;
 
+    @Param({"1", "10", "100"})
+    private int strs;
+
     @Benchmark
-    public int fastJsonSerialization() throws IOException, ClassNotFoundException {
+    public void fastJsonSerialization() throws IOException, ClassNotFoundException {
         student.setEducations(new LinkedList<>());
-        long start = System.currentTimeMillis();
+
         for (int i = 0; i < count; i++){
             student.setName(String.valueOf(i));
             student.setAge(22+i);
             student.setHeight(1.80+i);
             student.setPhone(15927175619L+i);
             student.setLikes(new String[]{"swimming", "running", "eating"});
+
             List<String> list = student.getEducations();
-            list.add(String.valueOf(i));
+            for (int j = 0; j < strs; j ++){
+                list.add(String.valueOf(j));
+            }
             student.setEducations(list);
-            assert student.toString().equals(
-                    FastjsonSerialization.FASTJSON_SERIALIZATION.deserialize(
-                            FastjsonSerialization.FASTJSON_SERIALIZATION.serialize(student)));
+
+
+            FastjsonSerialization.FASTJSON_SERIALIZATION.deserialize(
+                    FastjsonSerialization.FASTJSON_SERIALIZATION.serialize(student));
         }
-        System.out.println(System.currentTimeMillis()-start);
-        return 0;
     }
 
     @Benchmark
-    public int javaSerialization() throws IOException, ClassNotFoundException {
+    public void javaSerialization() throws IOException, ClassNotFoundException {
         student.setEducations(new LinkedList<>());
 
         for (int i = 0; i < count; i++){
@@ -61,14 +68,14 @@ public class SerializationBenchmark {
             student.setLikes(new String[]{"swimming", "running", "eating"});
 
             List<String> list = student.getEducations();
-            list.add(String.valueOf(i));
+            for (int j = 0; j < strs; j ++){
+                list.add(String.valueOf(j));
+            }
             student.setEducations(list);
-            // System.out.println(student.toString());
-            assert student.toString().equals(
-                    JavaNativeSerialization.JAVA_NATIVE_SERIALIZATION.deserialize(
-                            JavaNativeSerialization.JAVA_NATIVE_SERIALIZATION.serialize(student)));
+
+            JavaNativeSerialization.JAVA_NATIVE_SERIALIZATION.deserialize(
+                    JavaNativeSerialization.JAVA_NATIVE_SERIALIZATION.serialize(student));
         }
-        return 0;
     }
 
     public static void main(String[] args) throws RunnerException {
