@@ -2,6 +2,7 @@ package cn.shuaijunlan.trpc.remoting.netty4;
 
 import cn.shuaijunlan.trpc.remoting.netty4.server.NettyServerInitializer;
 import io.netty.bootstrap.ServerBootstrap;
+import io.netty.channel.Channel;
 import io.netty.channel.ChannelOption;
 import io.netty.channel.EventLoopGroup;
 import io.netty.channel.epoll.Epoll;
@@ -26,6 +27,8 @@ public class NettyServer {
             new EpollEventLoopGroup(Runtime.getRuntime().availableProcessors()+1) :
             new NioEventLoopGroup(Runtime.getRuntime().availableProcessors()+1);
 
+    private Channel serverChannel;
+
     /**
      * doBinding
      * @param port
@@ -39,13 +42,18 @@ public class NettyServer {
                 .childOption(ChannelOption.TCP_NODELAY, true)
                 .childHandler(new NettyServerInitializer());
         try {
-            bootstrap.bind(port).addListener(
+            serverChannel = bootstrap.bind(port).addListener(
                     future -> LOGGER.info("Server bootstrap successfully, listening on port: {}", port)
-            ).sync();
+            ).sync().channel();
         } catch (InterruptedException e) {
             e.printStackTrace();
             boss.shutdownGracefully();
             worker.shutdownGracefully();
         }
+    }
+    public void shutdownNow(){
+        serverChannel.close();
+        boss.shutdownNow();
+        worker.shutdownNow();
     }
 }

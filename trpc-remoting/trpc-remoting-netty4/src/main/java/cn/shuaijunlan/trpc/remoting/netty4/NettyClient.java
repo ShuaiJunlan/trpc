@@ -8,6 +8,8 @@ import io.netty.channel.epoll.EpollEventLoopGroup;
 import io.netty.channel.epoll.EpollSocketChannel;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.nio.NioSocketChannel;
+import io.netty.util.concurrent.Future;
+import io.netty.util.concurrent.GenericFutureListener;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -30,11 +32,18 @@ public class NettyClient {
                 .option(ChannelOption.SO_KEEPALIVE, true)
                 .handler(new NettyClientInitializer());
         try {
-            channel = bootstrap.connect(host, port).addListener(
-                    (ChannelFutureListener) future -> LOGGER.info("Client do connecting successfully")
-            ).sync().channel();
+            channel = bootstrap.connect(host, port).addListener(new GenericFutureListener<Future<? super Void>>() {
+                @Override
+                public void operationComplete(Future<? super Void> future) throws Exception {
+                    if (future.isSuccess()){
+                        LOGGER.info("Client do connecting successfully");
+                    }else {
+                        LOGGER.error(future.cause().getMessage());
+                    }
+                }
+            }).sync().channel();
         } catch (InterruptedException e) {
-            e.printStackTrace();
+            LOGGER.error(e.getMessage());
             worker.shutdownGracefully();
         }
     }
