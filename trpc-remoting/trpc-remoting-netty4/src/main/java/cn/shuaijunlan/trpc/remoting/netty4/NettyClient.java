@@ -30,12 +30,9 @@ public class NettyClient {
                 .option(ChannelOption.SO_KEEPALIVE, true)
                 .handler(new NettyClientInitializer());
         try {
-            channel = bootstrap.connect(host, port).addListener(new ChannelFutureListener() {
-                @Override
-                public void operationComplete(ChannelFuture future) throws Exception {
-                    LOGGER.info("Client do connecting successfully");
-                }
-            }).sync().channel();
+            channel = bootstrap.connect(host, port).addListener(
+                    (ChannelFutureListener) future -> LOGGER.info("Client do connecting successfully")
+            ).sync().channel();
         } catch (InterruptedException e) {
             e.printStackTrace();
             worker.shutdownGracefully();

@@ -1,5 +1,7 @@
 package cn.shuaijunlan.trpc.remoting.netty4.server;
 
+import cn.shuaijunlan.trpc.remoting.api.message.RequestMessage;
+import cn.shuaijunlan.trpc.remoting.api.protocol.TrpcProtocol;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
 import org.slf4j.Logger;
@@ -13,8 +15,12 @@ public class NettyServerHandler extends ChannelInboundHandlerAdapter {
     private static final Logger LOGGER = LoggerFactory.getLogger(NettyServerHandler.class);
     @Override
     public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
-        LOGGER.debug(msg.toString());
-        System.out.println(msg);
+        if (msg instanceof TrpcProtocol){
+            LOGGER.debug(msg.toString());
+            TrpcProtocol protocol = (TrpcProtocol) msg;
+            RequestMessage requestMessage = (RequestMessage) protocol.getData();
+            requestMessage.getInterfaceName();
+        }
         super.channelRead(ctx, msg);
     }
 }

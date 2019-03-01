@@ -10,18 +10,22 @@ import java.util.HashMap;
  */
 public class RequestMessage extends AbstractMessage implements Serializable {
     private static final long serialVersionUID = 10L;
-    private String className;
+    private String interfaceName;
     private String methodName;
     private String[] parameterTypes;
     private String[] parameterValues;
     private HashMap<String, String> attachment;
 
-    public String getClassName() {
-        return className;
+    public static long getSerialVersionUID() {
+        return serialVersionUID;
     }
 
-    public void setClassName(String className) {
-        this.className = className;
+    public String getInterfaceName() {
+        return interfaceName;
+    }
+
+    public void setInterfaceName(String interfaceName) {
+        this.interfaceName = interfaceName;
     }
 
     public String getMethodName() {
@@ -32,7 +36,7 @@ public class RequestMessage extends AbstractMessage implements Serializable {
         this.methodName = methodName;
     }
 
-    public String[] getparameterTypes() {
+    public String[] getParameterTypes() {
         return parameterTypes;
     }
 
@@ -59,9 +63,9 @@ public class RequestMessage extends AbstractMessage implements Serializable {
     @Override
     public String toString() {
         return "RequestMessage{" +
-                "className='" + className + '\'' +
+                "interfaceName='" + interfaceName + '\'' +
                 ", methodName='" + methodName + '\'' +
-                ", parameters=" + Arrays.toString(parameterTypes) +
+                ", parameterTypes=" + Arrays.toString(parameterTypes) +
                 ", parameterValues=" + Arrays.toString(parameterValues) +
                 ", attachment=" + attachment +
                 '}';

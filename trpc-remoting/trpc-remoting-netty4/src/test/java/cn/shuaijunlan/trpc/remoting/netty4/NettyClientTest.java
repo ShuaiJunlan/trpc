@@ -35,8 +35,6 @@ public class NettyClientTest {
         byteBuf.writeInt(data.length);
         byteBuf.writeBytes(data);
 
-        System.out.println(byteBuf.readableBytes());
-
         NettyClient nettyClient = new NettyClient();
         nettyClient.doConnect("127.0.0.1", 8080);
         try {

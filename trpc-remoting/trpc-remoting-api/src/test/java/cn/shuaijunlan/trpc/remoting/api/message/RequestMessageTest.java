@@ -14,7 +14,7 @@ public class RequestMessageTest {
     @Test
     public void toStringTest(){
         RequestMessage requestMessage = new RequestMessage();
-        requestMessage.setClassName(this.getClass().getName());
+        requestMessage.setInterfaceName(this.getClass().getName());
         requestMessage.setMethodName("test");
         requestMessage.setParameterTypes(new String[]{"1", "2"});
         requestMessage.setParameterValues(new String[]{"1", "2"});

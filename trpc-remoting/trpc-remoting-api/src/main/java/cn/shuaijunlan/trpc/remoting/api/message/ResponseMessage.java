@@ -9,9 +9,7 @@ import java.util.HashMap;
  */
 public class ResponseMessage extends AbstractMessage implements Serializable {
     private static final long serialVersionUID = 11L;
-    private String className;
-    private String methodName;
-    private String[] parameterTypes;
-    private String[] parameterValues;
+    private String returnType;
+    private String returnValue;
     private HashMap<String, String> attachment;
 }

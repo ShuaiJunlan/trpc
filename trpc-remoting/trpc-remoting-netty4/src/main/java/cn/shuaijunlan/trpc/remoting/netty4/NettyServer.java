@@ -32,7 +32,7 @@ public class NettyServer {
      * doBinding
      * @param port
      */
-    public void doBind(int port) {
+    public void doBind(final int port) {
         final ServerBootstrap bootstrap = new ServerBootstrap();
         bootstrap.group(boss, worker)
                 .channel(Epoll.isAvailable()? EpollServerSocketChannel.class: NioServerSocketChannel.class)
@@ -41,12 +41,9 @@ public class NettyServer {
                 .childOption(ChannelOption.TCP_NODELAY, true)
                 .childHandler(new NettyServerInitializer());
         try {
-            bootstrap.bind(port).addListener(new GenericFutureListener<Future<? super Void>>() {
-                @Override
-                public void operationComplete(Future<? super Void> future) throws Exception {
-                    LOGGER.info("Server bootstrap successfully");
-                }
-            }).sync();
+            bootstrap.bind(port).addListener(
+                    future -> LOGGER.info("Server bootstrap successfully, listening on port: {}", port)
+            ).sync();
         } catch (InterruptedException e) {
             e.printStackTrace();
             boss.shutdownGracefully();
