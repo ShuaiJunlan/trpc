@@ -32,7 +32,7 @@ public class TrpcProtocol extends AbstractProtocol {
     /**
      * data
      */
-    private Object data;
+    private byte[] data;
 
     public static short getMagicNumber() {
         return MAGIC_NUMBER;
@@ -70,11 +70,11 @@ public class TrpcProtocol extends AbstractProtocol {
         this.dataLength = dataLength;
     }
 
-    public Object getData() {
+    public byte[] getData() {
         return data;
     }
 
-    public void setData(Object data) {
+    public void setData(byte[] data) {
         this.data = data;
     }
 

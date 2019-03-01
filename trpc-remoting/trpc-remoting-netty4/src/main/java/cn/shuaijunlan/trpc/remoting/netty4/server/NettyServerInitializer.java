@@ -16,6 +16,7 @@ public class NettyServerInitializer extends ChannelInitializer<SocketChannel> {
         ch.pipeline().addLast(new Spliter(Integer.MAX_VALUE, 12, 4));
         ch.pipeline().addLast(new MessageEncoder());
         ch.pipeline().addLast(new MessageDecoder());
+        ch.pipeline().addLast(new MessageSenderHandler());
         ch.pipeline().addLast(new NettyServerHandler());
     }
 }

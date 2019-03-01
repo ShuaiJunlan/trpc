@@ -1,5 +1,6 @@
 package cn.shuaijunlan.trpc.remoting.netty4;
 
+import cn.shuaijunlan.trpc.remoting.api.message.AbstractMessage;
 import cn.shuaijunlan.trpc.remoting.netty4.client.NettyClientInitializer;
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.*;
@@ -46,6 +47,10 @@ public class NettyClient {
             LOGGER.error(e.getMessage());
             worker.shutdownGracefully();
         }
+    }
+
+    public void doWrite(AbstractMessage message){
+        channel.writeAndFlush("");
     }
 
     public Channel getChannel() {

@@ -1,7 +1,6 @@
 package cn.shuaijunlan.trpc.remoting.netty4;
 
 import cn.shuaijunlan.serizlization.java.JavaNativeSerialization;
-import cn.shuaijunlan.trpc.remoting.api.message.AbstractMessage;
 import cn.shuaijunlan.trpc.remoting.api.message.RequestMessage;
 import cn.shuaijunlan.trpc.remoting.api.protocol.TrpcProtocol;
 import cn.shuaijunlan.trpc.remoting.netty4.rpc.IHello;
@@ -23,7 +22,7 @@ import static org.junit.Assert.*;
  */
 public class NettyClientTest {
     NettyServer nettyServer = null;
-    @Before
+    // @Before
     public void before(){
         nettyServer = new NettyServer();
         nettyServer.doBind(8080);
@@ -70,9 +69,10 @@ public class NettyClientTest {
         requestMessage.setParameterValues(new String[]{"Shuai Junlan"});
         requestMessage.setAttachment(new HashMap<>());
 
-        trpcProtocol.setData(requestMessage);
 
-        byte[] data = getSerialization(trpcProtocol.getSerializationType()).serialize(trpcProtocol.getData());
+        byte[] data = getSerialization(trpcProtocol.getSerializationType()).serialize(requestMessage);
+        trpcProtocol.setData(data);
+
         trpcProtocol.setDataLength(data.length);
 
         ByteBuf byteBuf = Unpooled.buffer(8);
@@ -86,14 +86,19 @@ public class NettyClientTest {
         NettyClient nettyClient = new NettyClient();
         nettyClient.doConnect("127.0.0.1", 8080);
         try {
-            nettyClient.getChannel().writeAndFlush(byteBuf).sync();
+            nettyClient.getChannel().writeAndFlush(requestMessage).sync();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        try {
+            Thread.sleep(10000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
 
 
     }
-    @After
+    // @After
     public void close(){
         nettyServer.shutdownNow();
     }

@@ -10,6 +10,8 @@ import io.netty.channel.epoll.EpollEventLoopGroup;
 import io.netty.channel.epoll.EpollServerSocketChannel;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
+import io.netty.util.concurrent.Future;
+import io.netty.util.concurrent.GenericFutureListener;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -42,11 +44,18 @@ public class NettyServer {
                 .childOption(ChannelOption.TCP_NODELAY, true)
                 .childHandler(new NettyServerInitializer());
         try {
-            serverChannel = bootstrap.bind(port).addListener(
-                    future -> LOGGER.info("Server bootstrap successfully, listening on port: {}", port)
-            ).sync().channel();
+            serverChannel = bootstrap.bind(port).addListener(new GenericFutureListener<Future<? super Void>>() {
+                @Override
+                public void operationComplete(Future<? super Void> future) throws Exception {
+                    if (future.isSuccess()){
+                        LOGGER.info("Server bootstrap successfully, listening on port: {}", port);
+                    }else {
+                        LOGGER.error(future.cause().getMessage());
+                    }
+                }
+            }).sync().channel();
         } catch (InterruptedException e) {
-            e.printStackTrace();
+            LOGGER.error(e.getMessage());
             boss.shutdownGracefully();
             worker.shutdownGracefully();
         }
