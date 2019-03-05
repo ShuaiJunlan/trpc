@@ -9,8 +9,6 @@ import io.netty.buffer.ByteBuf;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.io.IOException;
-
 /**
  * @author Shuai Junlan[shuaijunlan@gmail.com].
  * @since Created in 4:45 PM 2/28/19.
