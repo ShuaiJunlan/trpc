@@ -18,19 +18,28 @@ public class JdkDynamicProxyHandler implements InvocationHandler {
     private static final Logger LOGGER = LoggerFactory.getLogger(JdkDynamicProxyHandler.class);
 
     private final TrpcInvoker trpcInvoker = new TrpcInvoker();
+    private String interfaceName;
+
+    public JdkDynamicProxyHandler(String interfaceName){
+        this.interfaceName = interfaceName;
+    }
 
     @Override
     public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
+        LOGGER.debug("Interface clazz: {}", interfaceName);
         LOGGER.debug("Invocation method name: {}", method.getName());
 
         LOGGER.debug("Parameter values: {}", Arrays.toString(args));
+        String[] types = new String[args.length];
+        String[] values = new String[args.length];
+        int i = 0;
         if (args != null){
-            List<String> list = new ArrayList<>();
             for (Object arg : args){
-                list.add(arg.getClass().getName());
-                LOGGER.debug("Parameters types: {}", list.toString());
+                types[i] = arg.getClass().getName();
+                values[i++] = arg.toString();
+                LOGGER.debug("Parameters types: {}", Arrays.toString(types));
             }
         }
-        return trpcInvoker.invoke(method.getName(), method.getName(), false, false);
+        return trpcInvoker.invoke(interfaceName, method.getName(), values, types, true, false);
     }
 }

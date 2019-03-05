@@ -1,4 +1,4 @@
-package cn.shuaijunlan.trpc.rpc;
+package cn.shuaijunlan.trpc.remoting.netty4;
 
 import cn.shuaijunlan.trpc.common.utils.Assert;
 
@@ -16,6 +16,8 @@ public class TrpcFuture {
     public TrpcFuture(){
         completableFuture = new CompletableFuture<>();
     }
+
+
     public Object get() throws ExecutionException, InterruptedException {
         return completableFuture.get();
     }

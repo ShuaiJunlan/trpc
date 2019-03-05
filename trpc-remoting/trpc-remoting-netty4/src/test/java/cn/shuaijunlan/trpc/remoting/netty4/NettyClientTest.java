@@ -110,8 +110,8 @@ public class NettyClientTest {
         for (int i = 0; i < 1000; i++){
             requestMessage.setParameterValues(new String[]{"Shuai Junlan"+i});
             nettyClient.getChannel().writeAndFlush(requestMessage);
-            NettyClient.RESULTS.put(requestMessage.getRequestID(), new CompletableFuture<>());
-            System.out.println(NettyClient.RESULTS.get(requestMessage.getRequestID()).get());
+            // NettyClient.RESULTS.put(requestMessage.getRequestID(), new CompletableFuture<>());
+            // System.out.println(NettyClient.RESULTS.get(requestMessage.getRequestID()).get());
         }
         try {
             Thread.sleep(10000000);

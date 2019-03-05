@@ -74,6 +74,8 @@ public class NettyReceiverHandler extends SimpleChannelInboundHandler<AbstractPr
                             }
                         } catch (ClassNotFoundException e) {
                             e.printStackTrace();
+                            // LOGGER.error(e.getException().getMessage());
+                            return;
                         }
                         CLAZZS.put(requestMessage.getInterfaceName(), classes);
                     }

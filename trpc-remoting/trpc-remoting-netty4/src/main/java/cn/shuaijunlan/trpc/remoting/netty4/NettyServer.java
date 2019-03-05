@@ -21,6 +21,7 @@ import org.slf4j.LoggerFactory;
  */
 public class NettyServer {
     private static final Logger LOGGER = LoggerFactory.getLogger(NettyServer.class);
+
     private EventLoopGroup boss = Epoll.isAvailable() ?
             new EpollEventLoopGroup(1) :
             new NioEventLoopGroup(1);

@@ -9,6 +9,6 @@ import java.lang.reflect.Proxy;
 public class JdkDynamicProxy {
     @SuppressWarnings("unchecked")
     public static <T> T newInstance(final Class<T> interfaces){
-        return (T) Proxy.newProxyInstance(interfaces.getClassLoader(), new Class<?>[]{interfaces}, new JdkDynamicProxyHandler());
+        return (T) Proxy.newProxyInstance(interfaces.getClassLoader(), new Class<?>[]{interfaces}, new JdkDynamicProxyHandler(interfaces.getName()));
     }
 }

@@ -1,4 +1,4 @@
-package cn.shuaijunlan.trpc.rpc;
+package cn.shuaijunlan.trpc.remoting.netty4;
 
 import cn.shuaijunlan.trpc.common.utils.Assert;
 
@@ -13,12 +13,12 @@ public class TrpcContext {
     public static final AtomicLong REQUEST_ID = new AtomicLong(1);
     public static final ConcurrentHashMap<Long, TrpcFuture> FUTURE_CONCURRENT_HASH_MAP = new ConcurrentHashMap<>(1<<8);
 
-    private final TrpcFuture trpcFuture;
+    private TrpcFuture trpcFuture;
     public TrpcContext(){
-        this.trpcFuture = new TrpcFuture();
     }
 
     private static final ThreadLocal<TrpcContext> TRPC_CONTEXT_THREAD_LOCAL = new ThreadLocal<>();
+
 
     public static TrpcContext getContext(){
         if (TRPC_CONTEXT_THREAD_LOCAL.get() == null){
@@ -26,8 +26,13 @@ public class TrpcContext {
         }
         return TRPC_CONTEXT_THREAD_LOCAL.get();
     }
-    public TrpcFuture getFuture(){
+
+    public TrpcFuture getTrpcFuture() {
         Assert.notNull(trpcFuture, "trpcFuture==null");
         return trpcFuture;
+    }
+
+    public void setTrpcFuture(TrpcFuture trpcFuture) {
+        this.trpcFuture = trpcFuture;
     }
 }

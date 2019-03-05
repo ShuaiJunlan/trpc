@@ -7,6 +7,6 @@ package cn.shuaijunlan.trpc.rpc.proxy;
 public class InterfacesImpl implements Interfaces {
     @Override
     public String getName(String name) {
-        return name;
+        return name + ".{Author: Shuai Junlan}";
     }
 }

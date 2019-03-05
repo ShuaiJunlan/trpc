@@ -24,7 +24,7 @@ import java.util.concurrent.ConcurrentHashMap;
  * @since Created in 3:46 PM 2/28/19.
  */
 public class NettyClient {
-    public static final ConcurrentHashMap<Long, CompletableFuture<Object>> RESULTS = new ConcurrentHashMap<>();
+    // public static final ConcurrentHashMap<Long, CompletableFuture<Object>> RESULTS = new ConcurrentHashMap<>();
     private static final Logger LOGGER = LoggerFactory.getLogger(NettyClient.class);
     private EventLoopGroup worker = Epoll.isAvailable() ?
             new EpollEventLoopGroup(Runtime.getRuntime().availableProcessors()) :
