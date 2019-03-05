@@ -32,7 +32,7 @@ public class NettyClient {
 
     private Channel channel;
 
-    public void doConnect(String host, int port)  {
+    public NettyClient doConnect(String host, int port)  {
         Bootstrap bootstrap = new Bootstrap();
         bootstrap.group(worker)
                 .channel(Epoll.isAvailable()? EpollSocketChannel.class: NioSocketChannel.class)
@@ -53,10 +53,11 @@ public class NettyClient {
             LOGGER.error(e.getMessage());
             worker.shutdownGracefully();
         }
+        return this;
     }
 
     public void doWrite(AbstractMessage message){
-        channel.writeAndFlush("");
+        channel.writeAndFlush(message);
     }
     public void close(){
         channel.close();

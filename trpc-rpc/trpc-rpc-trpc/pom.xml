@@ -12,5 +12,20 @@
     <artifactId>trpc-rpc-trpc</artifactId>
     <packaging>jar</packaging>
 
+    <dependencies>
+        <dependency>
+            <groupId>cn.shuaijunlan</groupId>
+            <artifactId>trpc-common</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>cn.shuaijunlan</groupId>
+            <artifactId>trpc-remoting-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>cn.shuaijunlan</groupId>
+            <artifactId>trpc-remoting-netty4</artifactId>
+        </dependency>
+    </dependencies>
+
 
 </project>
