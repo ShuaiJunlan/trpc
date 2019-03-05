@@ -28,7 +28,7 @@ import java.util.concurrent.atomic.AtomicInteger;
  * @since Created in 6:56 PM 2/28/19.
  */
 public class NettyReceiverHandler extends SimpleChannelInboundHandler<AbstractProtocol> {
-    private static final ThreadPoolExecutor THREAD_POOL_EXECUTOR = new ThreadPoolExecutor(20, 20, 1000, TimeUnit.MILLISECONDS, new ArrayBlockingQueue<>(1000), new ThreadFactory() {
+    private static final ThreadPoolExecutor THREAD_POOL_EXECUTOR = new ThreadPoolExecutor(20, 20, 1000, TimeUnit.MILLISECONDS, new ArrayBlockingQueue<>(10000), new ThreadFactory() {
         private final AtomicInteger threadCount = new AtomicInteger(0);
 
         private static final String PREFIX = "NETTY-SERVER-THREAD-";
@@ -95,7 +95,7 @@ public class NettyReceiverHandler extends SimpleChannelInboundHandler<AbstractPr
                             parameterTypes[i] = Class.forName(requestMessage.getParameterTypes()[i]);
                             Method method = t.getMethod(methodName, parameterTypes);
                             o = method.invoke(re[0].newInstance(), requestMessage.getParameterValues());
-                            LOGGER.debug("Get invoke return [{}]", o);
+                            LOGGER.debug("Invoke return [{}]", o);
                         } catch (ClassNotFoundException | NoSuchMethodException | IllegalAccessException | InstantiationException | InvocationTargetException e) {
                             e.printStackTrace();
                         }

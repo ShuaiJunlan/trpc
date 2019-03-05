@@ -3,7 +3,9 @@ package cn.shuaijunlan.trpc.remoting.netty4;
 import cn.shuaijunlan.trpc.remoting.api.message.AbstractMessage;
 import cn.shuaijunlan.trpc.remoting.netty4.client.NettyClientInitializer;
 import io.netty.bootstrap.Bootstrap;
-import io.netty.channel.*;
+import io.netty.channel.Channel;
+import io.netty.channel.ChannelOption;
+import io.netty.channel.EventLoopGroup;
 import io.netty.channel.epoll.Epoll;
 import io.netty.channel.epoll.EpollEventLoopGroup;
 import io.netty.channel.epoll.EpollSocketChannel;
@@ -14,11 +16,15 @@ import io.netty.util.concurrent.GenericFutureListener;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ConcurrentHashMap;
+
 /**
  * @author Shuai Junlan[shuaijunlan@gmail.com].
  * @since Created in 3:46 PM 2/28/19.
  */
 public class NettyClient {
+    public static final ConcurrentHashMap<Long, CompletableFuture<Object>> RESULTS = new ConcurrentHashMap<>();
     private static final Logger LOGGER = LoggerFactory.getLogger(NettyClient.class);
     private EventLoopGroup worker = Epoll.isAvailable() ?
             new EpollEventLoopGroup(Runtime.getRuntime().availableProcessors()) :

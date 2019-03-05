@@ -13,6 +13,8 @@ import org.junit.Test;
 
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.atomic.AtomicLong;
 
 import static org.junit.Assert.*;
@@ -74,25 +76,12 @@ public class NettyClientTest {
         requestMessage.setAttachment(new HashMap<>());
 
 
-        // byte[] data = getSerialization(trpcProtocol.getSerializationType()).serialize(requestMessage);
-        // trpcProtocol.setData(data);
-        //
-        // trpcProtocol.setDataLength(data.length);
-        //
-        // ByteBuf byteBuf = Unpooled.buffer(8);
-        // byteBuf.writeShort(TrpcProtocol.getMagicNumber());
-        // byteBuf.writeByte(trpcProtocol.getRequestType());
-        // byteBuf.writeByte(trpcProtocol.getSerializationType());
-        // byteBuf.writeLong(trpcProtocol.getRequestID());
-        // byteBuf.writeInt(data.length);
-        // byteBuf.writeBytes(data);
-
         NettyClient nettyClient = new NettyClient();
         nettyClient.doConnect("127.0.0.1", 8080);
         // try {
-        //     for (int i = 0; i < 30000; i++){
+            for (int i = 0; i < 10000; i++){
                 nettyClient.getChannel().writeAndFlush(requestMessage);
-            // }
+            }
         // } catch (InterruptedException e) {
         //     e.printStackTrace();
         // }
@@ -103,6 +92,32 @@ public class NettyClientTest {
         }
 
 
+    }
+
+    @Test
+    public void doRPCAsync() throws ExecutionException, InterruptedException {
+        RequestMessage requestMessage = new RequestMessage();
+        requestMessage.setRequestID(ATOMIC_LONG.getAndIncrement());
+        requestMessage.setRequestType((byte)1);
+        requestMessage.setInterfaceName(IHello.class.getName());
+        requestMessage.setMethodName("sayHello");
+        requestMessage.setParameterTypes(new String[]{"java.lang.String"});
+
+        requestMessage.setAttachment(new HashMap<>());
+
+        NettyClient nettyClient = new NettyClient();
+        nettyClient.doConnect("127.0.0.1", 8080);
+        for (int i = 0; i < 1000; i++){
+            requestMessage.setParameterValues(new String[]{"Shuai Junlan"+i});
+            nettyClient.getChannel().writeAndFlush(requestMessage);
+            NettyClient.RESULTS.put(requestMessage.getRequestID(), new CompletableFuture<>());
+            System.out.println(NettyClient.RESULTS.get(requestMessage.getRequestID()).get());
+        }
+        try {
+            Thread.sleep(10000000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
     // @After
     public void close(){
