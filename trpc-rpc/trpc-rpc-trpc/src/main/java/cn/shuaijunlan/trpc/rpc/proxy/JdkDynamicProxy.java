@@ -1,4 +1,4 @@
-package cn.shuaijunlan.trpc.common.proxy;
+package cn.shuaijunlan.trpc.rpc.proxy;
 
 import java.lang.reflect.Proxy;
 

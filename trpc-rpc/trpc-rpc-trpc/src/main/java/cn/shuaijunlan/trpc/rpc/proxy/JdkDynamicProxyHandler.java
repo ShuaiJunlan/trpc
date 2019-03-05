@@ -1,5 +1,6 @@
-package cn.shuaijunlan.trpc.common.proxy;
+package cn.shuaijunlan.trpc.rpc.proxy;
 
+import cn.shuaijunlan.trpc.rpc.TrpcInvoker;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -15,6 +16,9 @@ import java.util.List;
  */
 public class JdkDynamicProxyHandler implements InvocationHandler {
     private static final Logger LOGGER = LoggerFactory.getLogger(JdkDynamicProxyHandler.class);
+
+    private final TrpcInvoker trpcInvoker = new TrpcInvoker();
+
     @Override
     public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
         LOGGER.debug("Invocation method name: {}", method.getName());
@@ -27,8 +31,6 @@ public class JdkDynamicProxyHandler implements InvocationHandler {
                 LOGGER.debug("Parameters types: {}", list.toString());
             }
         }
-
-
-        return args[0];
+        return trpcInvoker.invoke(method.getName(), method.getName(), false, false);
     }
 }
