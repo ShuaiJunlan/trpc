@@ -10,8 +10,9 @@
         <module>trpc-remoting</module>
         <module>trpc-serialization</module>
         <module>trpc-registry</module>
-        <module>trpc-demo</module>
+        <module>trpc-example</module>
         <module>trpc-microbench</module>
+        <module>trpc-rpc</module>
     </modules>
 
     <parent>
