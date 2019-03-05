@@ -7,6 +7,11 @@ package cn.shuaijunlan.trpc.remoting.netty4.rpc;
 public class HelloImpl implements IHello {
     @Override
     public String sayHello(String hello) {
+        try {
+            Thread.sleep(50);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         return "hello: " + hello;
     }
 }

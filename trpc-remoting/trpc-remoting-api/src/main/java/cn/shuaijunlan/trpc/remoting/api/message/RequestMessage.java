@@ -10,6 +10,8 @@ import java.util.HashMap;
  */
 public class RequestMessage extends AbstractMessage implements Serializable {
     private static final long serialVersionUID = 10L;
+    private Long requestID;
+    private Byte requestType;
     private String interfaceName;
     private String methodName;
     private String[] parameterTypes;
@@ -18,6 +20,22 @@ public class RequestMessage extends AbstractMessage implements Serializable {
 
     public static long getSerialVersionUID() {
         return serialVersionUID;
+    }
+
+    public Long getRequestID() {
+        return requestID;
+    }
+
+    public void setRequestID(Long requestID) {
+        this.requestID = requestID;
+    }
+
+    public Byte getRequestType() {
+        return requestType;
+    }
+
+    public void setRequestType(Byte requestType) {
+        this.requestType = requestType;
     }
 
     public String getInterfaceName() {
@@ -63,7 +81,9 @@ public class RequestMessage extends AbstractMessage implements Serializable {
     @Override
     public String toString() {
         return "RequestMessage{" +
-                "interfaceName='" + interfaceName + '\'' +
+                "requestID=" + requestID +
+                ", requestType=" + requestType +
+                ", interfaceName='" + interfaceName + '\'' +
                 ", methodName='" + methodName + '\'' +
                 ", parameterTypes=" + Arrays.toString(parameterTypes) +
                 ", parameterValues=" + Arrays.toString(parameterValues) +

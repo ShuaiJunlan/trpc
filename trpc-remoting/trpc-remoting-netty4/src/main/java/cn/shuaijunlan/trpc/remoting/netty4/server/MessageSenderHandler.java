@@ -1,13 +1,11 @@
 package cn.shuaijunlan.trpc.remoting.netty4.server;
 
 import cn.shuaijunlan.serizlization.java.JavaNativeSerialization;
-import cn.shuaijunlan.trpc.remoting.api.message.AbstractMessage;
 import cn.shuaijunlan.trpc.remoting.api.message.ResponseMessage;
 import cn.shuaijunlan.trpc.remoting.api.protocol.TrpcProtocol;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelOutboundHandlerAdapter;
 import io.netty.channel.ChannelPromise;
-import io.netty.channel.SimpleChannelInboundHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -27,7 +25,7 @@ public class MessageSenderHandler extends ChannelOutboundHandlerAdapter {
 
             TrpcProtocol trpcProtocol = new TrpcProtocol();
             trpcProtocol.setSerializationType((byte)1);
-            trpcProtocol.setRequestID(1);
+            trpcProtocol.setRequestID(responseMessage.getResponseID());
             trpcProtocol.setRequestType((byte)1);
             trpcProtocol.setDataLength(bytes.length);
             trpcProtocol.setData(bytes);

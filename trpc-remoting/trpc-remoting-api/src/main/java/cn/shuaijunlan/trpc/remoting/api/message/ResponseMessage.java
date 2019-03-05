@@ -9,12 +9,21 @@ import java.util.HashMap;
  */
 public class ResponseMessage extends AbstractMessage implements Serializable {
     private static final long serialVersionUID = 11L;
+    private Long responseID;
     private String returnType;
     private String returnValue;
     private HashMap<String, String> attachment;
 
     public static long getSerialVersionUID() {
         return serialVersionUID;
+    }
+
+    public Long getResponseID() {
+        return responseID;
+    }
+
+    public void setResponseID(Long responseID) {
+        this.responseID = responseID;
     }
 
     public String getReturnType() {
@@ -44,7 +53,8 @@ public class ResponseMessage extends AbstractMessage implements Serializable {
     @Override
     public String toString() {
         return "ResponseMessage{" +
-                "returnType='" + returnType + '\'' +
+                "responseID=" + responseID +
+                ", returnType='" + returnType + '\'' +
                 ", returnValue='" + returnValue + '\'' +
                 ", attachment=" + attachment +
                 '}';

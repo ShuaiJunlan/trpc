@@ -21,7 +21,6 @@ import org.slf4j.LoggerFactory;
  */
 public class NettyServer {
     private static final Logger LOGGER = LoggerFactory.getLogger(NettyServer.class);
-    private static final int PORT = 8000;
     private EventLoopGroup boss = Epoll.isAvailable() ?
             new EpollEventLoopGroup(1) :
             new NioEventLoopGroup(1);
@@ -64,5 +63,10 @@ public class NettyServer {
         serverChannel.close();
         boss.shutdownNow();
         worker.shutdownNow();
+    }
+    public void shutdownGracefully(){
+        serverChannel.close();
+        boss.shutdownGracefully();
+        worker.shutdownGracefully();
     }
 }

@@ -82,7 +82,7 @@ public class TrpcProtocol extends AbstractProtocol {
     public String toString() {
         return "TrpcProtocol{" +
                 "requestType=" + requestType +
-                ", serizlizationType=" + serializationType +
+                ", serializationType=" + serializationType +
                 ", requestID=" + requestID +
                 ", dataLength=" + dataLength +
                 ", data=" + data +

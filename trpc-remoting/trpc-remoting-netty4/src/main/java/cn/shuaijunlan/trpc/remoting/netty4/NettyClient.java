@@ -52,6 +52,10 @@ public class NettyClient {
     public void doWrite(AbstractMessage message){
         channel.writeAndFlush("");
     }
+    public void close(){
+        channel.close();
+        worker.shutdownGracefully();
+    }
 
     public Channel getChannel() {
         return channel;

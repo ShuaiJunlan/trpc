@@ -21,11 +21,12 @@ public class ClientMessageSenderHandler extends ChannelOutboundHandlerAdapter {
     @Override
     public void write(ChannelHandlerContext ctx, Object msg, ChannelPromise promise) throws Exception {
         if (msg instanceof RequestMessage){
+            RequestMessage requestMessage = (RequestMessage)msg;
             LOGGER.debug("ClientMessageSenderHandler");
             TrpcProtocol trpcProtocol = new TrpcProtocol();
             trpcProtocol.setSerializationType((byte)1);
-            trpcProtocol.setRequestID(1);
-            trpcProtocol.setRequestType((byte)1);
+            trpcProtocol.setRequestID(requestMessage.getRequestID());
+            trpcProtocol.setRequestType(requestMessage.getRequestType());
             byte[] data = JavaNativeSerialization.JAVA_NATIVE_SERIALIZATION.serialize(msg);
             trpcProtocol.setData(data);
             trpcProtocol.setDataLength(data.length);
