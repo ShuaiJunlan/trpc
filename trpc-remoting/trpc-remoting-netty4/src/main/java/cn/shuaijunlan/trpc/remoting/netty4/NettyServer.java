@@ -60,6 +60,7 @@ public class NettyServer {
             worker.shutdownGracefully();
         }
     }
+    @Deprecated
     public void shutdownNow(){
         serverChannel.close();
         boss.shutdownNow();

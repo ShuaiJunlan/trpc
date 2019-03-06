@@ -12,8 +12,8 @@ public class NettyServerTest {
 
     @Test
     public void doBind() throws InterruptedException {
-        NettyServer nettyServer = new NettyServer();
-        nettyServer.doBind(8080);
-        Thread.sleep(Integer.MAX_VALUE);
+        // NettyServer nettyServer = new NettyServer();
+        // nettyServer.doBind(8080);
+        // Thread.sleep(Integer.MAX_VALUE);
     }
 }
