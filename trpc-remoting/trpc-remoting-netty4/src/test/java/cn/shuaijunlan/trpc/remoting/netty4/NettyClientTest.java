@@ -26,7 +26,7 @@ import static org.junit.Assert.*;
 public class NettyClientTest {
     private static final AtomicLong ATOMIC_LONG = new AtomicLong(10);
     NettyServer nettyServer = null;
-    // @Before
+    @Before
     public void before(){
         nettyServer = new NettyServer();
         nettyServer.doBind(8080);
@@ -79,17 +79,17 @@ public class NettyClientTest {
         NettyClient nettyClient = new NettyClient();
         nettyClient.doConnect("127.0.0.1", 8080);
         // try {
-            for (int i = 0; i < 10000; i++){
-                nettyClient.getChannel().writeAndFlush(requestMessage);
-            }
+        //     for (int i = 0; i < 10000; i++){
+        //         nettyClient.getChannel().writeAndFlush(requestMessage);
+        //     }
         // } catch (InterruptedException e) {
         //     e.printStackTrace();
         // }
-        try {
-            Thread.sleep(10000000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        // try {
+        //     Thread.sleep(10000000);
+        // } catch (InterruptedException e) {
+        //     e.printStackTrace();
+        // }
 
 
     }
@@ -107,19 +107,19 @@ public class NettyClientTest {
 
         NettyClient nettyClient = new NettyClient();
         nettyClient.doConnect("127.0.0.1", 8080);
-        for (int i = 0; i < 1000; i++){
-            requestMessage.setParameterValues(new String[]{"Shuai Junlan"+i});
+        // for (int i = 0; i < 1000; i++){
+            requestMessage.setParameterValues(new String[]{"Shuai Junlan"});
             nettyClient.getChannel().writeAndFlush(requestMessage);
             // NettyClient.RESULTS.put(requestMessage.getRequestID(), new CompletableFuture<>());
             // System.out.println(NettyClient.RESULTS.get(requestMessage.getRequestID()).get());
-        }
-        try {
-            Thread.sleep(10000000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        // }
+        // try {
+        //     Thread.sleep(10000000);
+        // } catch (InterruptedException e) {
+        //     e.printStackTrace();
+        // }
     }
-    // @After
+    @After
     public void close(){
         nettyServer.shutdownNow();
     }

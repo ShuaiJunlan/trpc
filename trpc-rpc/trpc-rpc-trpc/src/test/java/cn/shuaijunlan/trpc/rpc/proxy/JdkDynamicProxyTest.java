@@ -1,6 +1,9 @@
 package cn.shuaijunlan.trpc.rpc.proxy;
 
+import cn.shuaijunlan.trpc.remoting.netty4.NettyServer;
 import cn.shuaijunlan.trpc.remoting.netty4.TrpcContext;
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 
 import java.util.concurrent.ExecutionException;
@@ -10,6 +13,12 @@ import java.util.concurrent.ExecutionException;
  * @since Created in 10:00 AM 3/1/19.
  */
 public class JdkDynamicProxyTest {
+    NettyServer nettyServer = null;
+    @Before
+    public void test(){
+        nettyServer = new NettyServer();
+        nettyServer.doBind(8080);
+    }
 
     @Test
     public void testSync() {
@@ -28,5 +37,9 @@ public class JdkDynamicProxyTest {
         } catch (ExecutionException | InterruptedException e) {
             e.printStackTrace();
         }
+    }
+    @After
+    public void testAfter(){
+        nettyServer.shutdownNow();
     }
 }
