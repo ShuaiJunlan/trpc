@@ -14,11 +14,11 @@ import java.util.concurrent.ExecutionException;
  */
 public class JdkDynamicProxyTest {
     NettyServer nettyServer = null;
-    @Before
-    public void test(){
-        nettyServer = new NettyServer();
-        nettyServer.doBind(8080);
-    }
+    // @Before
+    // public void test(){
+    //     nettyServer = new NettyServer();
+    //     nettyServer.doBind(8080);
+    // }
 
     @Test
     public void testSync() {
@@ -38,8 +38,8 @@ public class JdkDynamicProxyTest {
             e.printStackTrace();
         }
     }
-    @After
-    public void testAfter(){
-        nettyServer.shutdownNow();
-    }
+    // @After
+    // public void testAfter(){
+    //     nettyServer.shutdownNow();
+    // }
 }
