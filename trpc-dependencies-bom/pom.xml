@@ -19,6 +19,7 @@
         <reflections.version>0.9.11</reflections.version>
         <jmh.version>1.21</jmh.version>
         <cglib.version>3.2.9</cglib.version>
+        <hessian.version>4.0.3</hessian.version>
         <!--test-->
         <junit.version>4.12</junit.version>
     </properties>
@@ -68,6 +69,11 @@
                 <groupId>cglib</groupId>
                 <artifactId>cglib</artifactId>
                 <version>${cglib.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.alipay.sofa</groupId>
+                <artifactId>hessian</artifactId>
+                <version>${hessian.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

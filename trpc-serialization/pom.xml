@@ -15,6 +15,7 @@
         <module>trpc-serialization-api</module>
         <module>trpc-serialization-java</module>
         <module>trpc-serialization-fastjson</module>
+        <module>trpc-serialization-hessian</module>
     </modules>
 
 
