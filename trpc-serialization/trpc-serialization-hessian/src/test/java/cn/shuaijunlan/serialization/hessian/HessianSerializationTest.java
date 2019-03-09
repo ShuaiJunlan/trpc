@@ -1,19 +1,19 @@
-package cn.shuaijunlan.serizlization.java;
+package cn.shuaijunlan.serialization.hessian;
 
 import cn.shuaijunlan.trpc.serialization.api.Serialization;
 import org.junit.Test;
 
 import java.io.IOException;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 
 /**
  * @author Shuai Junlan[shuaijunlan@gmail.com].
- * @since Created in 6:24 PM 2/28/19.
+ * @since Created in 11:23 AM 3/9/19.
  */
-public class JavaNativeSerializationTest {
+public class HessianSerializationTest {
+    private Serialization serialization = HessianSerialization.HESSIAN_SERIALIZATION;
 
-    private Serialization serialization = JavaNativeSerialization.JAVA_NATIVE_SERIALIZATION;
     @Test
     public void serialize() {
         Employee employee = new Employee();
