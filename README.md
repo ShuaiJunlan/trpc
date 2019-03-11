@@ -5,7 +5,7 @@
 A tiny rpc framework basing on Netty.
 
 ### Features
-* Customized rpc protocol naming `TrpcPrptocol`
+* Customized rpc protocol named `TrpcPrptocol`
 * Basing on reactor threads model, achieving high performance and high throughput
 * Supporting sync and async remoting procedure call
 * Supporting multi proxy methods including `Java Proxy` and `Cglib`
