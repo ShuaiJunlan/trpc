@@ -1,8 +1,11 @@
 package cn.shuaijunlan.trpc.rpc.proxy.cglib;
 
+import cn.shuaijunlan.trpc.remoting.netty4.NettyServer;
 import cn.shuaijunlan.trpc.remoting.netty4.TrpcContext;
 import cn.shuaijunlan.trpc.rpc.proxy.Interfaces;
 import cn.shuaijunlan.trpc.rpc.proxy.JdkDynamicProxy;
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 
 import java.util.concurrent.ExecutionException;
@@ -12,6 +15,13 @@ import java.util.concurrent.ExecutionException;
  * @since Created in 9:58 PM 3/8/19.
  */
 public class CglibProxyTest {
+    NettyServer nettyServer = null;
+    @Before
+    public void test(){
+        nettyServer = new NettyServer();
+        nettyServer.doBind(8080);
+    }
+
     @Test
     public void test1() throws InterruptedException {
         Interfaces interfaces = (Interfaces) CglibProxy.newInstance(Interfaces.class);
@@ -24,5 +34,9 @@ public class CglibProxyTest {
         } catch (ExecutionException | InterruptedException e) {
             e.printStackTrace();
         }
+    }
+    @After
+    public void testAfter(){
+        nettyServer.shutdownNow();
     }
 }
