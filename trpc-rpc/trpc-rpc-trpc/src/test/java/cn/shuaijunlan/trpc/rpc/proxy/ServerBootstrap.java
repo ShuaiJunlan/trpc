@@ -12,6 +12,6 @@ public class ServerBootstrap {
     public void doBind() throws InterruptedException {
         NettyServer nettyServer = new NettyServer();
         nettyServer.doBind(8080);
-        // Thread.sleep(Integer.MAX_VALUE);
+        Thread.sleep(Integer.MAX_VALUE);
     }
 }

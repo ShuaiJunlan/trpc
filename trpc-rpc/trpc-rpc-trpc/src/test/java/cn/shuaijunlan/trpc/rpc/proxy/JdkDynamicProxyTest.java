@@ -23,7 +23,7 @@ public class JdkDynamicProxyTest {
     @Test
     public void testSync() {
         Interfaces interfaces = JdkDynamicProxy.newInstance(Interfaces.class);
-        System.out.println(interfaces.getName("hello trpc"));
+        System.out.println(interfaces.getName("Junlan"));
     }
     @Test
     public void testAsync() throws InterruptedException {
