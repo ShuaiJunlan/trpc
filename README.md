@@ -13,8 +13,41 @@ A tiny rpc framework basing on Netty.
 
 ### TODO
 * Achieving service registry and discovery module
+* Adding load balance strategy
 * Supporting Java SPI, dynamic loading needed modules
 
 ### Get Started
+* **Exporting services**
+```java
+public interface Interfaces {
+    String getName(String name);
+}
 
+public class InterfacesImpl implements Interfaces {
+    @Override
+    public String getName(String name) {
+        return name + " Shuai";
+    }
+}
+
+public class ServerBootstrap {
+    @Test
+    public void doBind() throws InterruptedException {
+        NettyServer nettyServer = new NettyServer();
+        nettyServer.doBind(8080);
+        Thread.sleep(Integer.MAX_VALUE);
+    }
+}
+```
+* **Remote invoking**
+```java
+@Test
+public void testSync() {
+    Interfaces interfaces = JdkDynamicProxy.newInstance(Interfaces.class);
+    System.out.println(interfaces.getName("Junlan"));
+}
+```
+
+### trpc protocol
+![](https://github.com/ShuaiJunlan/trpc/blob/master/documents/assert/trpc-protocol.png)
 ### Licence
