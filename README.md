@@ -8,7 +8,7 @@ A tiny rpc framework basing on Netty.
 * Customized rpc protocol named `TrpcPrptocol`
 * Basing on reactor threads model, achieving high performance and high throughput
 * Supporting sync and async remoting procedure call
-* Supporting multi proxy methods including `Java Proxy` and `Cglib`
+* Supporting multi proxy methods including `Java Proxy` and `cglib`
 * Supporting multi serialization methods including `Java serialization` `Fastjson` and `Hessian`
 
 ### TODO
@@ -47,11 +47,11 @@ public void testSync() {
     System.out.println(interfaces.getName("Junlan"));
 }
 ```
-### trpc protocol
+### Trpc Protocol
 ![](https://github.com/ShuaiJunlan/trpc/blob/master/documents/assert/trpc-protocol.png)
 
-* Magic number(two bytes): identifies trpc protocol with value: `0x0012`;
-* Request type(one byte): three request type, synchronization/asynchronization/one way;
+* Magic number(two bytes): identifies trpc protocol with value: `0x0012`
+* Request type(one byte): three request type, synchronization/asynchronization/one way
 * Serialization type(one byte): using which serialization method
 * Requested ID(eight bytes): request message id
 * Data length(four bytes): the length of  the data
