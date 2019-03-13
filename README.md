@@ -47,7 +47,14 @@ public void testSync() {
     System.out.println(interfaces.getName("Junlan"));
 }
 ```
-
 ### trpc protocol
 ![](https://github.com/ShuaiJunlan/trpc/blob/master/documents/assert/trpc-protocol.png)
+
+* Magic number(two bytes): identifies trpc protocol with value: `0x0012`;
+* Request type(one byte): three request type, synchronization/asynchronization/one way;
+* Serialization type(one byte): using which serialization method
+* Requested ID(eight bytes): request message id
+* Data length(four bytes): the length of  the data
+* Data: the binary data
+
 ### Licence
