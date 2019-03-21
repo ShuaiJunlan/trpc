@@ -48,7 +48,7 @@ public void testSync() {
 }
 ```
 ### Trpc Protocol
-A self-defined protocol which just support trpc framework
+A self-defined protocol which just support trpc framework, detailed designing as follows:
 
 ![](https://github.com/ShuaiJunlan/trpc/blob/master/documents/assert/trpc-protocol.png)
 
