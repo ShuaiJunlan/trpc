@@ -12,10 +12,10 @@ A tiny rpc framework basing on Netty.
 * Supporting multi serialization methods including `Java serialization` `Fastjson` and `Hessian`
 
 ### TODO
-* Achieving service registry and discovery module
-* Adding load balance strategy
-* Supporting Java SPI, dynamic loading needed modules
-* Supporting `router strategy` and `cluster fault tolerance`
+- [ ] Achieving service registry and discovery module
+- [ ] Adding load balance strategy
+- [ ] Supporting Java SPI, dynamic loading needed modules
+- [ ] Supporting `router strategy` and `cluster fault tolerance`
 
 ### Get Started
 * **Exporting services**
