@@ -1,6 +1,6 @@
 ## trpc
 
-[![Build Status](https://travis-ci.com/ShuaiJunlan/trpc.svg?token=99wnxLqpskbRCf2sLyrg&branch=master)](https://travis-ci.com/ShuaiJunlan/trpc)
+[![Build Status](https://travis-ci.com/ShuaiJunlan/trpc.svg?token=99wnxLqpskbRCf2sLyrg&branch=master)](https://travis-ci.com/ShuaiJunlan/trpc) [![license](https://img.shields.io/github/license/ShuaiJunlan/trpc.svg)](https://github.com/ShuaiJunlan/trpc/blob/master/LICENSE)
 
 A tiny rpc framework basing on Netty.
 
@@ -15,6 +15,7 @@ A tiny rpc framework basing on Netty.
 * Achieving service registry and discovery module
 * Adding load balance strategy
 * Supporting Java SPI, dynamic loading needed modules
+* Supporting `router strategy` and `cluster fault tolerance`
 
 ### Get Started
 * **Exporting services**
@@ -59,4 +60,5 @@ A self-defined protocol which just support trpc framework, detailed designing as
 * Data length(four bytes): the length of  the data
 * Data: the binary data
 
-### Licence
+### License
+Licensed under `Apache-2.0`. See [LICENSE](https://github.com/ShuaiJunlan/trpc/blob/master/LICENSE) for further details.
