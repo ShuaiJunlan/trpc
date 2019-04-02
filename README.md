@@ -60,4 +60,5 @@ A self-defined protocol which just support trpc framework, detailed designing as
 * Data length(four bytes): the length of  the data
 * Data: the binary data
 
-### Licence
+### License
+Licensed under `Apache-2.0`. See [LICENSE](https://github.com/ShuaiJunlan/trpc/blob/master/LICENSE) for further details.
