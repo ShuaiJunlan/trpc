@@ -22,6 +22,7 @@
         <hessian.version>4.0.3</hessian.version>
         <!--test-->
         <junit.version>4.12</junit.version>
+        <jmeter.version>3.0</jmeter.version>
     </properties>
     <dependencyManagement>
         <dependencies>
@@ -75,6 +76,19 @@
                 <artifactId>hessian</artifactId>
                 <version>${hessian.version}</version>
             </dependency>
+
+            <!--jmeter dependency-->
+            <dependency>
+                <groupId>org.apache.jmeter</groupId>
+                <artifactId>ApacheJMeter_core</artifactId>
+                <version>${jmeter.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.jmeter</groupId>
+                <artifactId>ApacheJMeter_java</artifactId>
+                <version>${jmeter.version}</version>
+            </dependency>
+            <!--jmeter dependency end-->
         </dependencies>
     </dependencyManagement>
 

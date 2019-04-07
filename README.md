@@ -67,7 +67,7 @@ public class JdkDynamicProxyTest {
 ### Trpc Protocol
 A self-defined protocol which just support trpc framework, detailed designing as follows:
 
-![](https://github.com/ShuaiJunlan/trpc/blob/master/documents/assert/trpc-protocol.png)
+![](https://github.com/ShuaiJunlan/trpc/blob/master/documents/assert/trpc-protocol.png?raw=true)
 
 * Magic number(two bytes): identifies trpc protocol with value: `0x0012`
 * Request type(one byte): three request type, synchronization/asynchronization/one way

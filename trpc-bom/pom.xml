@@ -46,6 +46,11 @@
                 <artifactId>trpc-serialization-java</artifactId>
                 <version>${project.version}</version>
             </dependency>
+            <dependency>
+                <groupId>cn.shuaijunlan</groupId>
+                <artifactId>trpc-rpc-trpc</artifactId>
+                <version>${project.version}</version>
+            </dependency>
 
         </dependencies>
     </dependencyManagement>
