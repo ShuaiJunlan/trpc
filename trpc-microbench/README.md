@@ -5,3 +5,8 @@
 [Apache Jmeter进阶-RPC服务压测](https://blog.csdn.net/f59130/article/details/74171190)
 
 https://blog.csdn.net/weixin_33810006/article/details/87298574
+
+#### Packaging
+```text
+mvn package assembly:single
+```

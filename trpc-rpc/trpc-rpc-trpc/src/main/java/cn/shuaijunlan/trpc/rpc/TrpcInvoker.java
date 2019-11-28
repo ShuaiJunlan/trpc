@@ -4,7 +4,6 @@ import cn.shuaijunlan.trpc.remoting.api.message.RequestMessage;
 import cn.shuaijunlan.trpc.remoting.netty4.NettyClient;
 import cn.shuaijunlan.trpc.remoting.netty4.TrpcContext;
 import cn.shuaijunlan.trpc.remoting.netty4.TrpcFuture;
-import cn.shuaijunlan.trpc.rpc.bootstrap.TrpcClientBootstrap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
