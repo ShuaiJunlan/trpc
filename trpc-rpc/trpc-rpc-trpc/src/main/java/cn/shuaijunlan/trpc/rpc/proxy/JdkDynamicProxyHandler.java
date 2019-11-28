@@ -6,9 +6,7 @@ import org.slf4j.LoggerFactory;
 
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
 /**
  * @author Shuai Junlan[shuaijunlan@gmail.com].
@@ -40,6 +38,6 @@ public class JdkDynamicProxyHandler implements InvocationHandler {
                 LOGGER.debug("Parameters types: {}", Arrays.toString(types));
             }
         }
-        return trpcInvoker.invoke(interfaceName, method.getName(), values, types, true, false);
+        return trpcInvoker.invoke(interfaceName, method.getName(), values, types, false, false);
     }
 }
